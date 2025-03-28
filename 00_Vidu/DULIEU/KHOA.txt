@@ -2,3 +2,4 @@ TH:Công Nghệ Thông Tin
 KT:Tài Chính Kế Toán
 DT:Kỹ Thuật Điện Tử
 OT:Công nghệ ô tô
+LO:Khoa Logistic

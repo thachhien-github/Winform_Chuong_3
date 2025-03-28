@@ -91,6 +91,7 @@ namespace _00_Vidu
             this.btnGhiFile.Size = new System.Drawing.Size(204, 60);
             this.btnGhiFile.TabIndex = 5;
             this.btnGhiFile.Text = "Ghi File";
+            this.btnGhiFile.Click += new System.EventHandler(this.btnGhiFile_Click);
             // 
             // Form1
             // 

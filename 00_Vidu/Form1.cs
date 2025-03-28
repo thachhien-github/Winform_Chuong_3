@@ -27,6 +27,7 @@ namespace _00_Vidu
 
         private void Khoi_Tao_listbox()
         {
+            lstKhoa.DataSource = null;
             lstKhoa.ValueMember = "MaKH";
             lstKhoa.DisplayMember = "TenKH";
             lstKhoa.DataSource = KHOAs;
@@ -35,16 +36,29 @@ namespace _00_Vidu
         private void doc_khoa()
         {
             string duong_dan = @"..\..\DULIEU\KHOA.txt";
-            string[] mang_dong = File.ReadAllLines(duong_dan);
-            KHOAs.Clear();
-            foreach (string chuoi_khoa in mang_dong)
+
+            if (File.Exists(duong_dan)) // Kiểm tra tệp tồn tại trước khi đọc
             {
-                string[] mang_thanh_phan = chuoi_khoa.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                KHOA kh = new KHOA();
-                kh.MaKH = mang_thanh_phan[0];
-                kh.TenKH = mang_thanh_phan[1];
-                KHOAs.Add(kh);
-            }    
+                string[] mang_dong = File.ReadAllLines(duong_dan);
+                KHOAs.Clear();
+
+                foreach (string chuoi_khoa in mang_dong)
+                {
+                    string[] mang_thanh_phan = chuoi_khoa.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (mang_thanh_phan.Length >= 2)
+                    {
+                        KHOA kh = new KHOA();
+                        kh.MaKH = mang_thanh_phan[0];
+                        kh.TenKH = mang_thanh_phan[1];
+                        KHOAs.Add(kh);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy tệp dữ liệu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDirectoryExists_Click(object sender, EventArgs e)
@@ -71,15 +85,62 @@ namespace _00_Vidu
         {
             DirectoryInfo Myfolder = new DirectoryInfo(@"C:\Windows\Boot\DVD");
             if (Myfolder.Exists == true)
-                MessageBox.Show("Đường dẫn Myfolder tồn tại");
+                MessageBox.Show("Đường dẫn Myfolder tồn tại","Thông báo",MessageBoxButtons.OK);
             else
-                MessageBox.Show("Đường dẫn Myfolder không tồn tại");
+                MessageBox.Show("Đường dẫn Myfolder tồn tại", "Thông báo", MessageBoxButtons.OK);
         }
 
         private void btnSplit_Click(object sender, EventArgs e)
         {
             string Chuoi = "A01:Thạch Hiền:Giáo viên:Khoa CNTT";
             string[] Chuoi_thanh_phan = Chuoi.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            string ketQua = "";
+
+            for (int i = 0; i < Chuoi_thanh_phan.Length; i++)
+            {
+                ketQua += Chuoi_thanh_phan[i] + "\n";
+            }
+
+            MessageBox.Show(ketQua, "Kết quả Split");
+        }
+
+        private void btnGhiFile_Click(object sender, EventArgs e)
+        {
+            ghi_khoa();
+            doc_khoa();
+            Khoi_Tao_listbox();
+        }
+
+        private void ghi_khoa()
+        {
+            string duong_dan = @"..\..\DULIEU\KHOA.txt";
+
+            // Kiểm tra trùng lặp trước khi thêm khoa mới
+            bool tonTai = false;
+            foreach (KHOA kh in KHOAs)
+            {
+                if (kh.MaKH == "LO")
+                {
+                    tonTai = true;
+                    break;
+                }
+            }
+
+            if (!tonTai)
+            {
+                KHOAs.Add(new KHOA { MaKH = "LO", TenKH = "Khoa Logistic" });
+            }
+
+            List<string> danh_sach_chuoi_khoa = new List<string>();
+
+            foreach (KHOA kh in KHOAs)
+            {
+                string chuoi_khoa = kh.MaKH + ":" + kh.TenKH;
+                danh_sach_chuoi_khoa.Add(chuoi_khoa);
+            }
+
+            File.WriteAllLines(duong_dan, danh_sach_chuoi_khoa);
+            MessageBox.Show("Ghi tệp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
