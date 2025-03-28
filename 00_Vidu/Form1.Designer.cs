@@ -31,7 +31,7 @@ namespace _00_Vidu
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lstKhoa = new System.Windows.Forms.ListBox();
             this.btnDirectoryExists = new System.Windows.Forms.Button();
             this.btnDirectoryGetFiles = new System.Windows.Forms.Button();
             this.btnDirectoryInfoExists = new System.Windows.Forms.Button();
@@ -39,19 +39,14 @@ namespace _00_Vidu
             this.btnGhiFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // lstKhoa
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 24;
-            this.listBox1.Items.AddRange(new object[] {
-            "Công Nghệ Thông Tin",
-            "Tài Chính Kế Toán",
-            "Kỹ Thuật Điện Tử",
-            "Công nghệ ô tô"});
-            this.listBox1.Location = new System.Drawing.Point(12, 20);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(526, 316);
-            this.listBox1.TabIndex = 0;
+            this.lstKhoa.FormattingEnabled = true;
+            this.lstKhoa.ItemHeight = 24;
+            this.lstKhoa.Location = new System.Drawing.Point(12, 20);
+            this.lstKhoa.Name = "lstKhoa";
+            this.lstKhoa.Size = new System.Drawing.Size(526, 316);
+            this.lstKhoa.TabIndex = 0;
             // 
             // btnDirectoryExists
             // 
@@ -78,6 +73,7 @@ namespace _00_Vidu
             this.btnDirectoryInfoExists.Size = new System.Drawing.Size(204, 60);
             this.btnDirectoryInfoExists.TabIndex = 3;
             this.btnDirectoryInfoExists.Text = "DirectoryInfo Exists";
+            this.btnDirectoryInfoExists.Click += new System.EventHandler(this.btnDirectoryInfoExists_Click);
             // 
             // btnSplit
             // 
@@ -86,6 +82,7 @@ namespace _00_Vidu
             this.btnSplit.Size = new System.Drawing.Size(204, 60);
             this.btnSplit.TabIndex = 4;
             this.btnSplit.Text = "Split";
+            this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
             // 
             // btnGhiFile
             // 
@@ -99,7 +96,7 @@ namespace _00_Vidu
             // 
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(787, 354);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lstKhoa);
             this.Controls.Add(this.btnDirectoryExists);
             this.Controls.Add(this.btnDirectoryGetFiles);
             this.Controls.Add(this.btnDirectoryInfoExists);
@@ -117,7 +114,7 @@ namespace _00_Vidu
         }
 
         #endregion
-        private ListBox listBox1;
+        private ListBox lstKhoa;
         private Button btnDirectoryExists, btnDirectoryGetFiles, btnDirectoryInfoExists, btnSplit, btnGhiFile;
     }
 }

@@ -13,6 +13,7 @@ namespace _00_Vidu
 {
     public partial class Form1: Form
     {
+        List<KHOA> KHOAs = new List<KHOA>();
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +21,30 @@ namespace _00_Vidu
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            doc_khoa();
+            Khoi_Tao_listbox();
+        }
 
+        private void Khoi_Tao_listbox()
+        {
+            lstKhoa.ValueMember = "MaKH";
+            lstKhoa.DisplayMember = "TenKH";
+            lstKhoa.DataSource = KHOAs;
+        }
+
+        private void doc_khoa()
+        {
+            string duong_dan = @"..\..\DULIEU\KHOA.txt";
+            string[] mang_dong = File.ReadAllLines(duong_dan);
+            KHOAs.Clear();
+            foreach (string chuoi_khoa in mang_dong)
+            {
+                string[] mang_thanh_phan = chuoi_khoa.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                KHOA kh = new KHOA();
+                kh.MaKH = mang_thanh_phan[0];
+                kh.TenKH = mang_thanh_phan[1];
+                KHOAs.Add(kh);
+            }    
         }
 
         private void btnDirectoryExists_Click(object sender, EventArgs e)
@@ -41,6 +65,21 @@ namespace _00_Vidu
             string[] danh_sach_duong_dan = Directory.GetFiles(duong_dan_hinh, "*.jpg");
             foreach (string duong_dan in danh_sach_duong_dan)
                 MessageBox.Show(duong_dan);
+        }
+
+        private void btnDirectoryInfoExists_Click(object sender, EventArgs e)
+        {
+            DirectoryInfo Myfolder = new DirectoryInfo(@"C:\Windows\Boot\DVD");
+            if (Myfolder.Exists == true)
+                MessageBox.Show("Đường dẫn Myfolder tồn tại");
+            else
+                MessageBox.Show("Đường dẫn Myfolder không tồn tại");
+        }
+
+        private void btnSplit_Click(object sender, EventArgs e)
+        {
+            string Chuoi = "A01:Thạch Hiền:Giáo viên:Khoa CNTT";
+            string[] Chuoi_thanh_phan = Chuoi.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
