@@ -1,0 +1,8 @@
+1:Nguyễn Văn Cường:1200
+2:Huỳnh Văn Đạt:1000
+3:Phạm Minh Thương:700
+4:Trần Kim Sang:2000
+5:Phạm Thị Thu Duy:1800
+6:Dư Gia Hưng:500
+7:Phạm Văn Hùng:8000
+8:Lê Thành Danh:9000
