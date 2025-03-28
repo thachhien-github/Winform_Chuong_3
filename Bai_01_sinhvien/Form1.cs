@@ -63,5 +63,80 @@ namespace Bai_01_sinhvien
             txtHoTen.Text = sv.HoTen;
             txtHocBong.Text = sv.HocBong.ToString("#,##0 đ");
         }
+
+        private void btnTiep_Click(object sender, EventArgs e)
+        {
+            txtMaSV.Clear();
+            txtHoTen.Clear();
+            txtHocBong.Clear();
+            txtMaSV.ReadOnly = false;
+            txtMaSV.Focus();
+        }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            if(txtMaSV.ReadOnly == false) //thêm mới
+            {
+                //tạo đôi tượng kiểu sinh viên
+                SINHVIEN sv = new SINHVIEN();
+                sv.MaSV = int.Parse(txtMaSV.Text);
+                sv.HoTen = txtHoTen.Text;
+                sv.HocBong = int.Parse(txtHocBong.Text);
+                //thêm đối tượng
+                SINHVIENs.Add(sv);
+                Khoitaolistbox();
+                //quy định lại dòng được chọn
+                lstSV.SelectedIndex = lstSV.Items.IndexOf(sv);
+                txtMaSV.ReadOnly = true;
+
+            }    
+            else //sau khi sửa
+            {
+                SINHVIEN sv_sua = tim_sinhvien(int.Parse(txtMaSV.Text));
+                sv_sua.MaSV = int.Parse(txtMaSV.Text);
+                sv_sua.HoTen = txtHoTen.Text;
+                sv_sua.HocBong = int.Parse(txtHocBong.Text.Replace(",", "").Replace("đ", ""));
+                Khoitaolistbox();
+
+            }    
+        }
+
+        private SINHVIEN tim_sinhvien(int msv)
+        {
+            SINHVIEN kq = null;
+            foreach (SINHVIEN sv in SINHVIENs)
+            {
+                if (sv.MaSV == msv)
+                    return sv;
+            }
+            return kq;
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (lstSV.SelectedIndex == -1) return;
+
+            DialogResult tl = MessageBox.Show("Bạn có muốn xoá sinh viên: " + txtHoTen.Text + " không (Y/N)?", "Xóa sinh viên",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (tl == DialogResult.Yes)
+            {
+                SINHVIEN sv_xoa = tim_sinhvien(int.Parse(txtMaSV.Text));
+                SINHVIENs.Remove(sv_xoa);
+                Khoitaolistbox();
+            }
+
+            MessageBox.Show("Xóa sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //sự kiện này xảy ra khi form chuẩn bị đóng lại
+            //=> có thể huỷ bỏ (không đóng) => e.cancel = true
+            DialogResult tl = MessageBox.Show("Bạn có muốn đóng màn hình không (Y/N)?", "Đóng màn hình", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (tl == DialogResult.No) //không muốn thoát
+                e.Cancel = true; // huỷ bỏ đóng form
+        }
     }
 }

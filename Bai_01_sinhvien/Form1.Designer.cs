@@ -60,6 +60,7 @@
             this.btnTiep.TabIndex = 22;
             this.btnTiep.Text = "Tiếp";
             this.btnTiep.UseVisualStyleBackColor = false;
+            this.btnTiep.Click += new System.EventHandler(this.btnTiep_Click);
             // 
             // btnXoa
             // 
@@ -71,6 +72,7 @@
             this.btnXoa.TabIndex = 20;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnLuu
             // 
@@ -82,6 +84,7 @@
             this.btnLuu.TabIndex = 18;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = false;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // txtHocBong
             // 
@@ -156,6 +159,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cập nhật sinh viên";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
