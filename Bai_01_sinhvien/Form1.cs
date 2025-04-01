@@ -38,14 +38,14 @@ namespace Bai_01_sinhvien
             string duong_dan = @"..\..\DULIEU\SINHVIEN.txt";
             string[] mang_dong = File.ReadAllLines(duong_dan);
             SINHVIENs.Clear();
-                foreach (string chuoi_khoa in mang_dong)
+                foreach (string chuoi_sv in mang_dong)
                 {
-                    string[] mang_thanh_phan = chuoi_khoa.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                        SINHVIEN sv = new SINHVIEN();
-                        sv.MaSV = int.Parse(mang_thanh_phan[0]);
-                        sv.HoTen = mang_thanh_phan[1];
-                        sv.HocBong = int.Parse(mang_thanh_phan[2]);
-                        SINHVIENs.Add(sv);
+                    string[] mang_thanh_phan = chuoi_sv.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                    SINHVIEN sv = new SINHVIEN();
+                    sv.MaSV = int.Parse(mang_thanh_phan[0]);
+                    sv.HoTen = mang_thanh_phan[1];
+                    sv.HocBong = int.Parse(mang_thanh_phan[2]);
+                    SINHVIENs.Add(sv);
                 }
         }
 
@@ -129,14 +129,22 @@ namespace Bai_01_sinhvien
             MessageBox.Show("Xóa sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //sự kiện này xảy ra khi form chuẩn bị đóng lại
-            //=> có thể huỷ bỏ (không đóng) => e.cancel = true
-            DialogResult tl = MessageBox.Show("Bạn có muốn đóng màn hình không (Y/N)?", "Đóng màn hình", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (tl == DialogResult.No) //không muốn thoát
-                e.Cancel = true; // huỷ bỏ đóng form
+            ghi_file();
+        }
+
+        private void ghi_file()
+        {
+            string duong_dan = @"..\..\DULIEU\SINHVIEN.txt";
+            List<string> danh_sach_chuoi_sv = new List<string>();
+            foreach(SINHVIEN sv in SINHVIENs)
+            {
+                string chuoi_sv = sv.MaSV.ToString() + ":" + sv.HoTen + ":" + sv.HocBong.ToString();
+                danh_sach_chuoi_sv.Add(chuoi_sv);
+            }    
+            File.WriteAllLines(duong_dan, danh_sach_chuoi_sv);
+            MessageBox.Show("Ghi tệp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
