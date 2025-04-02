@@ -40,7 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lstHocVien = new System.Windows.Forms.ListBox();
+            this.lstSinhVien = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -185,15 +185,15 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Mã SV";
             // 
-            // lstHocVien
+            // lstSinhVien
             // 
-            this.lstHocVien.ForeColor = System.Drawing.Color.Blue;
-            this.lstHocVien.FormattingEnabled = true;
-            this.lstHocVien.ItemHeight = 24;
-            this.lstHocVien.Location = new System.Drawing.Point(12, 79);
-            this.lstHocVien.Name = "lstHocVien";
-            this.lstHocVien.Size = new System.Drawing.Size(270, 292);
-            this.lstHocVien.TabIndex = 10;
+            this.lstSinhVien.ForeColor = System.Drawing.Color.Blue;
+            this.lstSinhVien.FormattingEnabled = true;
+            this.lstSinhVien.ItemHeight = 24;
+            this.lstSinhVien.Location = new System.Drawing.Point(12, 79);
+            this.lstSinhVien.Name = "lstSinhVien";
+            this.lstSinhVien.Size = new System.Drawing.Size(270, 292);
+            this.lstSinhVien.TabIndex = 10;
             // 
             // label1
             // 
@@ -213,7 +213,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 385);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.lstHocVien);
+            this.Controls.Add(this.lstSinhVien);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Blue;
@@ -242,7 +242,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox lstHocVien;
+        private System.Windows.Forms.ListBox lstSinhVien;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtHocPhi;
     }
